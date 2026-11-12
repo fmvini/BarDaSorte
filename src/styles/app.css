@@ -417,6 +417,102 @@
   inset: 0 0 0 50%;
   overflow: hidden;
 }
+.hero-carousel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.hero-carousel-drag-surface {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  cursor: grab;
+}
+.hero-carousel-drag-surface:active {
+  cursor: grabbing;
+}
+.hero-carousel-arrow {
+  position: absolute;
+  z-index: 110;
+  top: 50%;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  color: #fff9f4;
+  border: 1px solid rgba(250, 232, 210, 0.55);
+  border-radius: 50%;
+  background: rgba(52, 16, 27, 0.78);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+.hero-carousel-arrow:hover {
+  background: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+.hero-carousel-arrow-left {
+  left: 3%;
+}
+.hero-carousel-arrow-left svg {
+  transform: rotate(180deg);
+}
+.hero-carousel-arrow-right {
+  right: 3%;
+}
+.hero-carousel-card {
+  position: absolute;
+  z-index: 2;
+  width: 158px;
+  overflow: hidden;
+  border: 1px solid rgba(250, 232, 210, 0.44);
+  border-radius: 10px;
+  background: #f8e9db;
+  box-shadow: 0 14px 45px rgba(16, 3, 9, 0.35);
+  pointer-events: auto;
+}
+.hero-carousel-card a {
+  display: block;
+  color: #34101b;
+}
+.hero-carousel-card img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background: #f8e9db;
+  filter: saturate(0.82);
+}
+.hero-carousel-caption {
+  display: flex;
+  min-height: 61px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 11px;
+}
+.hero-carousel-caption strong {
+  overflow: hidden;
+  font: 600 14px/1.1 var(--font-display);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hero-carousel-caption span {
+  overflow: hidden;
+  color: #80686e;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 .hero-orbit {
   position: absolute;
   border: 1px solid rgba(233, 201, 164, 0.15);
@@ -1534,6 +1630,23 @@
   .hero-art {
     inset: 232px 0 0 17%;
     opacity: 0.65;
+  }
+  .hero-carousel-card {
+    width: 126px;
+  }
+  .hero-carousel-arrow {
+    width: 28px;
+    height: 28px;
+  }
+  .hero-carousel-card img {
+    height: 145px;
+  }
+  .hero-carousel-caption {
+    min-height: 52px;
+    padding: 7px 8px;
+  }
+  .hero-carousel-caption strong {
+    font-size: 12px;
   }
   .hero-bottle {
     top: 40px;

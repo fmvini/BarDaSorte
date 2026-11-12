@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { searchByName, getRandom } from "../services/cocktailService.js";
 import { DrinkGrid } from "../components/drinks/DrinkGrid.jsx";
+import { DrinkCarousel } from "../components/drinks/DrinkCarousel.jsx";
 import { Icon } from "../components/Icons.jsx";
 import { EmptyState } from "../components/ui/EmptyState/EmptyState.jsx";
 import { Loader } from "../components/ui/Loader/Loader.jsx";
@@ -20,7 +21,18 @@ export default function Home() {
     setLoading(true);
     setError("");
     try {
-      setDrinks(await searchByName("margarita", { signal }));
+      const categories = ["margarita", "mojito", "negroni", "daiquiri", "martini"];
+      const results = await Promise.all(
+        categories.map((category) => searchByName(category, { signal })),
+      );
+      const uniqueDrinks = [
+        ...new Map(
+          results
+            .flat()
+            .map((drink) => [drink.id, drink]),
+        ).values(),
+      ];
+      setDrinks(uniqueDrinks);
     } catch (reason) {
       if (reason.name !== "AbortError") setError(reason.message);
     } finally {
@@ -80,14 +92,10 @@ export default function Home() {
             possibilidades sem fim.
           </div>
         </div>
-        <div className="hero-art" aria-hidden="true">
+        <div className="hero-art">
           <div className="hero-orbit orbit-one" />
           <div className="hero-orbit orbit-two" />
-          {drinks.slice(0, 3).map((drink, index) => (
-            <div key={drink.id} className={`hero-bottle bottle-${index + 1}`}>
-              <img src={drink.image} alt="" />
-            </div>
-          ))}
+          <DrinkCarousel drinks={drinks} />
           <span className="hero-stamp">
             FEITO
             <br />
