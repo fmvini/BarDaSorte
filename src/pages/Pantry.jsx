@@ -25,7 +25,6 @@ export default function Pantry() {
   const [suggestionError, setSuggestionError] = useState(false);
   const [results, setResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [nonAlcoholic, setNonAlcoholic] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
     listIngredients({ signal: controller.signal })
@@ -61,24 +60,21 @@ export default function Pantry() {
       setLoading(false);
     }
   };
-  const visibleResults = results.filter(
-    (drink) => !nonAlcoholic || drink.isAlcoholic === false,
-  );
   const groups = [
     {
       title: "Pode fazer agora",
       sub: "Você tem todos os ingredientes",
-      items: visibleResults.filter((drink) => drink.missing.length === 0),
+      items: results.filter((drink) => drink.missing.length === 0),
     },
     {
       title: "Falta 1 ingrediente",
       sub: "Quase lá — só falta um detalhe",
-      items: visibleResults.filter((drink) => drink.missing.length === 1),
+      items: results.filter((drink) => drink.missing.length === 1),
     },
     {
       title: "Falta mais um pouco",
       sub: "Boas ideias para a próxima ida ao mercado",
-      items: visibleResults.filter((drink) => drink.missing.length >= 2),
+      items: results.filter((drink) => drink.missing.length >= 2),
     },
   ];
   return (
@@ -186,13 +182,6 @@ export default function Pantry() {
           >
             <Icon name="spark" size={17} />
             {loading ? "Procurando combinações…" : "Ver o que posso preparar"}
-          </button>
-          <button
-            className={`filter-chip${nonAlcoholic ? " selected" : ""}`}
-            aria-pressed={nonAlcoholic}
-            onClick={() => setNonAlcoholic(!nonAlcoholic)}
-          >
-            <Icon name="filter" size={16} /> Sem álcool
           </button>
         </div>
       </section>
