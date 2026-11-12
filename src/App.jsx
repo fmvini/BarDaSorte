@@ -1,4 +1,4 @@
-import Button from "./components/ui/Button/Button";
+import EmptyState from "./components/ui/EmptyState/EmptyState";
 import ErrorMessage from "./components/ui/ErrorMessage/ErrorMessage";
 import Loader from "./components/ui/Loader/Loader";
 
@@ -7,6 +7,6 @@ export default function App() {
         <h1>Bar da Sorte</h1>
         <Loader></Loader>
         <ErrorMessage message="Não foi possível carregar os dados." onRetry={() => { }}></ErrorMessage>
-        <Button variant="primary" onClick={() => { }}>Clique aqui</Button>
+        <EmptyState title="Nenhum item encontrado" action={<button>Adicionar</button>}></EmptyState>
     </>)
     }
