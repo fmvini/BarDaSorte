@@ -1,32 +1,31 @@
 export function normalizeDrink(raw) {
-  if (!raw) return null
-
-  const ingredients = []
-  for (let i = 1; i <= 15; i++) {
-    const name = raw[`strIngredient${i}`]
-    if (name && name.trim()) {
+  if (!raw) return null;
+  const ingredients = [];
+  for (let index = 1; index <= 15; index += 1) {
+    const name = raw[`strIngredient${index}`]?.trim();
+    if (name)
       ingredients.push({
-        name: name.trim(),
-        measure: (raw[`strMeasure${i}`] || '').trim(),
-      })
-    }
+        name,
+        measure: raw[`strMeasure${index}`]?.trim() || "",
+      });
   }
-
   return {
     id: raw.idDrink,
-    name: raw.strDrink,
-    image: raw.strDrinkThumb,
-    category: raw.strCategory ?? null,
-    glass: raw.strGlass ?? null,
-    instructions: raw.strInstructions ?? null,
+    name: raw.strDrink || "Drink sem nome",
+    image: raw.strDrinkThumb || "",
+    category: raw.strCategory || "Cocktail",
+    glass: raw.strGlass || "",
+    instructions: raw.strInstructions || "",
     isAlcoholic: raw.strAlcoholic
-      ? raw.strAlcoholic.toLowerCase() !== 'non alcoholic'
+      ? raw.strAlcoholic.toLowerCase() !== "non alcoholic"
       : null,
     ingredients,
     hasDetails: Boolean(raw.strInstructions || ingredients.length),
-  }
+  };
 }
 
 export function normalizeList(data) {
-  return Array.isArray(data?.drinks) ? data.drinks.map(normalizeDrink) : []
+  return Array.isArray(data?.drinks)
+    ? data.drinks.map(normalizeDrink).filter(Boolean)
+    : [];
 }
