@@ -1,5 +1,5 @@
 import styles from "./Loader.module.css";
-import { Icon } from "../Icons.jsx";
+import { Icon } from "../../Icons.jsx";
 
 export default function Loader( { label = "Preparando seu bar..." } ) {
     return (

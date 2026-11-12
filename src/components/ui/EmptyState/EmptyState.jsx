@@ -1,4 +1,4 @@
-import { Icon } from "../Icons.jsx";
+import { Icon } from "../../Icons.jsx";
 
 export default function EmptyState({ title, children, action }) {
     return (
