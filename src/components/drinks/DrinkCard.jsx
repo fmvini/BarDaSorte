@@ -6,7 +6,7 @@ export function DrinkCard({ drink }){
     return (
         <article className="drink-card">
         <Link className="drink-image-wrap" 
-        to={`/drinks/${drink.id}`}
+        to={`/drink/${drink.id}`}
         aria-label={`Ver receita de ${drink.name}`}>
 
         <span className="photo-fallback">
@@ -19,7 +19,7 @@ export function DrinkCard({ drink }){
         </Link>
         <div className="drink-info">
             <div>
-                <Link to={`/drinks/${drink.id}`} className="drink-name">{drink.name}</Link>
+                <Link to={`/drink/${drink.id}`} className="drink-name">{drink.name}</Link>
                 <span className="drink.subtitle">{drink.isAlcoholic === false ? "Sem álcool" : "Uma receita para descobrir"}</span>
             </div>
             <FavoriteButton drink={drink} />
