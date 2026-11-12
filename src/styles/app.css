@@ -39,10 +39,9 @@
 .brand-mark {
   width: 40px;
   height: 40px;
-  display: grid;
-  place-items: center;
-  background: var(--accent);
-  color: #fff9f5;
+  display: block;
+  flex: 0 0 40px;
+  object-fit: cover;
   border-radius: 50% 50% 48% 48%;
 }
 .side-label,

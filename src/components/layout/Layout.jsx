@@ -8,12 +8,10 @@ import { useTheme } from "../../hooks/useTheme.js";
 function Brand() {
   return (
     <NavLink className="brand" to="/" aria-label="Bar da Sorte, início">
-      <span className="brand-mark">
-        <Icon name="glass" size={22} />
-      </span>
+      <img className="brand-mark" src="/favicon.svg" alt="" />
       <span>
-        Bar da <b>Sorte</b>.
-        <small>Descubra o que consegue fazer</small>
+        Bar da <b>Sorte</b>
+        <small>Qual seu proximo drink?</small>
       </span>
     </NavLink>
   );
