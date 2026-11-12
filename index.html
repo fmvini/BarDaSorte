@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bar da Sorte</title>
+    <meta name="theme-color" content="#fdf8f6" />
+    <meta name="description" content="Descubra o drink perfeito com o que você já tem em casa." />
+    <title>Bar da Sorte — seu próximo drink começa aqui</title>
+    <script>
+      try {
+        if (localStorage.getItem('bar-da-sorte:theme') === 'dark') {
+          document.documentElement.dataset.theme = 'dark'
+        }
+      } catch { /* O tema claro é o padrão se o armazenamento estiver indisponível. */ }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

@@ -1,6 +1,6 @@
 import { Icon } from "../../Icons.jsx";
 
-export default function EmptyState({ title, children, action }) {
+function EmptyState({ title, children, action }) {
     return (
         <div className="state-panel empty-state">
             <span className="empty-glass">
@@ -12,3 +12,6 @@ export default function EmptyState({ title, children, action }) {
         </div>
     )
 }
+
+export { EmptyState };
+export default EmptyState;

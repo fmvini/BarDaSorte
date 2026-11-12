@@ -1,4 +1,4 @@
-export default function ErrorMessage({ message = "Não foi possível carregar os dados.", onRetry }) {
+function ErrorMessage({ message = "Não foi possível carregar os dados.", onRetry }) {
     return (
         <div className="errorMessage" role="alert">
             <h2 className="errorMessage__title">
@@ -15,3 +15,6 @@ export default function ErrorMessage({ message = "Não foi possível carregar os
         </div>
     )
 }
+
+export { ErrorMessage };
+export default ErrorMessage;

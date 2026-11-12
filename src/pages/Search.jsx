@@ -18,10 +18,12 @@ export default function Search() {
   const [drinks, setDrinks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [nonAlcoholic, setNonAlcoholic] = useState(onlyNonAlcoholic);
   const [retryKey, setRetryKey] = useState(0);
-  useEffect(() => setNonAlcoholic(onlyNonAlcoholic), [onlyNonAlcoholic]);
-  useEffect(() => setDraft(query), [query]);
+  const nonAlcoholic = onlyNonAlcoholic;
+  useEffect(() => {
+    const timer = setTimeout(() => setDraft(query), 0);
+    return () => clearTimeout(timer);
+  }, [query]);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (draft.trim() !== query)
@@ -31,32 +33,38 @@ export default function Search() {
   }, [draft, query, setParams]);
   useEffect(() => {
     if (!query.trim() && !onlyNonAlcoholic) {
-      setDrinks([]);
-      setLoading(false);
-      return;
+      const timer = setTimeout(() => {
+        setDrinks([]);
+        setLoading(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
     const controller = new AbortController();
-    setLoading(true);
-    setError("");
-    const load = query.trim()
-      ? searchByName(query, { signal: controller.signal })
-      : getNonAlcoholicDrinks({ signal: controller.signal });
-    load
-      .then(setDrinks)
-      .catch((reason) => {
-        if (reason.name !== "AbortError") setError(reason.message);
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
-      });
-    return () => controller.abort();
+    const timer = setTimeout(() => {
+      setLoading(true);
+      setError("");
+      const load = query.trim()
+        ? searchByName(query, { signal: controller.signal })
+        : getNonAlcoholicDrinks({ signal: controller.signal });
+      load
+        .then(setDrinks)
+        .catch((reason) => {
+          if (reason.name !== "AbortError") setError(reason.message);
+        })
+        .finally(() => {
+          if (!controller.signal.aborted) setLoading(false);
+        });
+    }, 0);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [query, onlyNonAlcoholic, retryKey]);
   const visible = drinks.filter(
     (drink) => !nonAlcoholic || drink.isAlcoholic === false,
   );
   const toggleAlcohol = () => {
     const next = !nonAlcoholic;
-    setNonAlcoholic(next);
     const updated = {
       ...(query ? { q: query } : {}),
       ...(next ? { semAlcool: "1" } : {}),

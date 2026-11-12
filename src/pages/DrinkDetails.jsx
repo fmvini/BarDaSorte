@@ -36,8 +36,11 @@ export default function DrinkDetails() {
   );
   useEffect(() => {
     const controller = new AbortController();
-    load(controller.signal);
-    return () => controller.abort();
+    const timer = setTimeout(() => load(controller.signal), 0);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [load]);
   const surprise = async () => {
     setSurpriseBusy(true);

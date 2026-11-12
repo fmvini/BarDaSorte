@@ -29,8 +29,11 @@ export default function Home() {
   }, []);
   useEffect(() => {
     const controller = new AbortController();
-    load(controller.signal);
-    return () => controller.abort();
+    const timer = setTimeout(() => load(controller.signal), 0);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [load]);
   const surprise = async () => {
     setRandomBusy(true);
@@ -52,9 +55,9 @@ export default function Home() {
             <span /> BOAS HISTÓRIAS PEDEM UM BOM DRINK
           </div>
           <h1>
-            Encontre seu próximo
-            <br /> brinde 
-            <em>aqui.</em>
+            Seu próximo
+            <br /> drink 
+            <em> aqui.</em>
           </h1>
           <p>
             Encontre o drink certo para a noite com o que você já tem à mão.
