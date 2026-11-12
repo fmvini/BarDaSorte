@@ -3,14 +3,14 @@ import { useLocalStorage } from "../hooks/useLocalStorage.js";
 import { ThemeContext } from "./ThemeContext.jsx";
 
 export function ThemeProvider({children}) {
-    const [theme, setTheme] = useLocalStorage('bar-da-sorte:theme', 'light');
+    const [theme, setTheme] = useLocalStorage('bar-da-sorte:theme', 'dark');
 
     useEffect(() => {
         document.documentElement.dataset.theme = theme }, 
         [theme])
 
     const toggleTheme = useCallback(() => {
-        setTheme((current) => current === 'dark' ? 'light' : 'dark')}, [setTheme]);
+        setTheme((current) => current === 'light' ? 'dark' : 'light')}, [setTheme]);
 
     const value = useMemo(() => ({theme, toggleTheme}), [theme, toggleTheme]);
 
