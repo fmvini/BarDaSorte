@@ -67,9 +67,9 @@ export default function Home() {
             <span /> BOAS HISTÓRIAS PEDEM UM BOM DRINK
           </div>
           <h1>
-            Seu próximo
-            <br /> drink 
-            <em> aqui.</em>
+            Descubra seu 
+            <br /> próximo 
+            <em> drink.</em>
           </h1>
           <p>
             Encontre o drink certo para a noite com o que você já tem à mão.
